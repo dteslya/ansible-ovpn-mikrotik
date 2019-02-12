@@ -5,7 +5,7 @@
 # You need a python 2 interpreter first, so skip gathering facts, then use
 # 'setup:' to get them after the python 2 interpreter has been installed.
 # See 'pre_tasks' below
-  gather_facts: no
+  gather_facts: yes
   pre_tasks:
     # If python doesn't exist on path (type returns non-zero), install python
     - name: OpenVPN | install | Install python2 if necessary
