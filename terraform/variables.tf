@@ -1,0 +1,17 @@
+variable "vsphere_user" {}
+variable "vsphere_password" {}
+variable "vsphere_server" {}
+variable "vsphere_dc_name" {}
+variable "vsphere_dscluster" {}
+variable "vsphere_compute_cluster" {}
+variable "vsphere_portgroup_name" {}
+variable "vsphere_folder" {}
+variable "vsphere_template_name" {}
+variable "hostname" {}
+variable "domain" {}
+variable "ip" {}
+variable "netmask" {}
+variable "def_gw" {}
+variable "dns_server" {}
+variable "cpu_num" {}
+variable "mem" {}
