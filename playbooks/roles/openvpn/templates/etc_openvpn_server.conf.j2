@@ -32,8 +32,8 @@ client-to-client
 keepalive 10 120
 tun-mtu 1500
 mssfix 1450
-status /var/log/openvpn-status.log
-log  /var/log/openvpn.log
+status /var/log/openvpn-{{ item.proto }}-{{ item.port }}-status.log
+log  /var/log/openvpn-{{ item.proto }}-{{ item.port }}.log
 verb 3
 mute 10
 client-config-dir ccd

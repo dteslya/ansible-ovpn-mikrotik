@@ -5,11 +5,11 @@
 # You need a python 2 interpreter first, so skip gathering facts, then use
 # 'setup:' to get them after the python 2 interpreter has been installed.
 # See 'pre_tasks' below
-  gather_facts: yes
+  gather_facts: False
   pre_tasks:
     # If python doesn't exist on path (type returns non-zero), install python
     - name: OpenVPN | install | Install python2 if necessary
-      raw: 'type python >/dev/null 2>&1 || apt-get -y install python-minimal'
+      raw: 'type python >/dev/null 2>&1 || (apt -y update && apt install -y python-minimal)'
       changed_when: false
 
     - name: OpenVPN | install | Gather facts after python2 is available
