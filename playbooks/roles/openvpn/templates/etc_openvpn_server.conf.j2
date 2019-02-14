@@ -36,4 +36,4 @@ status /var/log/openvpn-{{ item.proto }}-{{ item.port }}-status.log
 log  /var/log/openvpn-{{ item.proto }}-{{ item.port }}.log
 verb 3
 mute 10
-client-config-dir ccd
+client-config-dir {{ openvpn_path_ccd }}
