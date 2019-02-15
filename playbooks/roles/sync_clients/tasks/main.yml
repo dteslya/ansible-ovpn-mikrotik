@@ -25,9 +25,6 @@
     clients_to_revoke: []
     clients_to_add: []
   
-- debug:
-    var: desired_valid_clients
-
 - name: OpenVPN | Sync Clients | Sync clients that will be revoked
   set_fact:
     clients_to_revoke: "{{ currently_valid_clients | difference(desired_valid_clients) }}"
