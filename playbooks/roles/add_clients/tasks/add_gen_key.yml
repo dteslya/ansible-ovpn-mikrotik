@@ -101,6 +101,13 @@
   no_log: true
   with_items:
     - "{{ clients_to_add }}"
+    
+- name: OpenVPN | Add Clients | Build ccd configs
+  template:
+    src: client_ccd.j2
+    dest: "{{ openvpn_path_ccd }}/{{ item.name }}"
+    mode: 0644
+  with_items: "{{ valid_clients }}"
 
 - name: OpenVPN | Add Clients | Build client configs (.ovpn files; external pkcs12)
   template:

@@ -14,12 +14,19 @@
   register: currently_valid_clients_out
   changed_when: false
 
+- name: OpenVPN | Sync Clients | Get list of desired valid clients
+  set_fact: 
+    valid_clients_names: "{{ valid_clients | map(attribute='name') | list }}"
+
 - name: OpenVPN | Sync Clients | Set facts
   set_fact:
     currently_valid_clients: "{{ currently_valid_clients_out.stdout.splitlines() }}"
-    desired_valid_clients: "{{ valid_clients }} + [ 'server@' + openvpn_server_common_name ]"
+    desired_valid_clients: "{{ valid_clients_names }} + [ 'server@' + openvpn_server_common_name ]"
     clients_to_revoke: []
     clients_to_add: []
+  
+- debug:
+    var: desired_valid_clients
 
 - name: OpenVPN | Sync Clients | Sync clients that will be revoked
   set_fact:

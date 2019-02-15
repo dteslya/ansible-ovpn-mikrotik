@@ -1,3 +1,0 @@
-- Ansible role to generate Mikrotik config out of template
-- Separate tcp and udp Openvpn servers in different roles
-- Smarter iptables rules handling (rules persistance after server reboot, don't add same rules multiple times when running install role)

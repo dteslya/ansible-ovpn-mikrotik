@@ -16,6 +16,3 @@
   include: add_gen_key.yml
   when: clients_to_add is defined
 
-- name: OpenVPN | Add Clients | Add via CSR
-  include: add_via_csr.yml
-  when: csr_path is defined

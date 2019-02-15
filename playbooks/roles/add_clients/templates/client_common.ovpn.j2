@@ -23,9 +23,8 @@ tls-version-min 1.2
 key-direction 1
 verb 3
 dhcp-option DNS 172.21.20.94
-
 {#
- <tls-auth>
- {{ openvpn_hmac_firewall_contents.stdout }}
- </tls-auth>
+<tls-auth>
+{{ openvpn_hmac_firewall_contents.stdout }}
+</tls-auth>
 #}

@@ -18,7 +18,7 @@
     responses:
       'Enter pass phrase for .*?:$': "{{ ca_password }}"
     chdir: "{{ openvpn_path_easyrsa }}"
-  no_log: true
+  no_log: false
   with_items: "{{ clients_to_revoke }}"
 
 - name: OpenVPN | Revoke Client | Rebuild CRL
