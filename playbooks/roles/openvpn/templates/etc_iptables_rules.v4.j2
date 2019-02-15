@@ -30,3 +30,5 @@
 {#
 {{ iptables_path }} -A INPUT -p tcp -i {{ ansible_default_ipv4.interface }} --dport {{ ansible_port | default('22') }} -j DROP
 #}
+# Save rules
+/usr/sbin/netfilter-persistent save
