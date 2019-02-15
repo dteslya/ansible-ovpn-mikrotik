@@ -46,7 +46,6 @@ valid_clients:
   - name: mikrotik
     ccd: ['iroute 172.16.0.0 255.240.0.0']
   - name: user1
-    ccd: []
 
 # Whether the install.yml playbook will load iptables rules.
 # If set to false you have to apply them yourself. See README section "Firewall".
