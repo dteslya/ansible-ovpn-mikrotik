@@ -8,7 +8,8 @@
     dest: "{{ openvpn_path }}/easyrsa"
 
 - name: OpenVPN | PKI | Make local destination folder
-  local_action: file path={{ local_creds_folder }}/ state=directory
+  delegate_to: localhost
+  file: path={{ local_creds_folder }}/ state=directory
   become: False
 
 - name: OpenVPN | PKI | Generate a random server common name
@@ -18,7 +19,7 @@
   when: openvpn_server_common_name_manual is not defined
 
 - name: OpenVPN | PKI | Set server common name
-  shell: echo "{{ openvpn_server_common_name_manual }}" > {{ openvpn_server_common_name_file }}
+  shell: echo "{{ openvpn_server_common_name_manual }}" > {{ openvpn_server_common_name_file }}
   args:
     creates: "{{ openvpn_server_common_name_file }}"
   when: openvpn_server_common_name_manual is defined
@@ -35,10 +36,10 @@
   when: ca_password is not defined
 
 - name: OpenVPN | PKI | Store CA password
-  local_action:
-    module: lineinfile
+  delegate_to: localhost
+  lineinfile:
     line: "ca_password: {{ ca_password_result.stdout }}"
-    path: "{{ inventory_dir }}/host_vars/{{inventory_hostname}}.yml"
+    path: "{{ inventory_dir }}/host_vars/{{ inventory_hostname }}.yml"
     create: true
   become: False
   when: ca_password is not defined
@@ -124,5 +125,5 @@
 - name: OpenVPN | Add Clients | Get CA cert
   fetch:
     src: "{{ openvpn_ca_cert }}"
-    dest: "{{ local_creds_folder }}/ca@{{openvpn_server_common_name}}.crt"
+    dest: "{{ local_creds_folder }}/ca@{{ openvpn_server_common_name }}.crt"
     flat: yes

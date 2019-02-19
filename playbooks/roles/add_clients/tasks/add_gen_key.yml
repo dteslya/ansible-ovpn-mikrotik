@@ -1,6 +1,8 @@
 ---
 - name: OpenVPN | Add Clients | Check for existing private key passwords
-  local_action: stat path="{{ local_creds_folder }}/{{ item }}/{{ openvpn_server_common_name }}_pk_pass.txt"
+  delegate_to: localhost
+  stat:
+    path: "{{ local_creds_folder }}/{{ item }}/{{ openvpn_server_common_name }}_pk_pass.txt"
   become: False
   register: client_pk_passwords_local
   with_items:
@@ -11,25 +13,32 @@
   no_log: true
   register: client_pk_passwords
   with_items: "{{ clients_to_add }}"
-  when: "client_pk_passwords_local.results[0].stat.exists == False"
+  when: not client_pk_passwords_local.results[0].stat.exists
 
 - name: OpenVPN | Add Clients | Make local destination
-  local_action: file path="{{ local_creds_folder }}/{{ item }}/" state=directory
+  delegate_to: localhost
+  file:
+    path: "{{ local_creds_folder }}/{{ item }}/"
+    state: directory
   become: False
   with_items:
     - "{{ clients_to_add }}"
 
 - name: OpenVPN | Add Clients | Write private key pass phrases
-  local_action: copy content={{ item[1].stdout }} dest="{{ local_creds_folder }}/{{ item[0] }}/{{ openvpn_server_common_name }}_pk_pass.txt"
+  delegate_to: localhost
+  copy:
+    content: "{{ item[1].stdout }}"
+    dest: "{{ local_creds_folder }}/{{ item[0] }}/{{ openvpn_server_common_name }}_pk_pass.txt"
   no_log: true
   become: False
   with_together:
     - "{{ clients_to_add }}"
     - "{{ client_pk_passwords.results }}"
-  when: "client_pk_passwords_local.results[0].stat.exists == False"
+  when: not client_pk_passwords_local.results[0].stat.exists
 
 - name: OpenVPN | Add Clients | Read private key pass phrases
-  local_action: command cat "{{ local_creds_folder }}/{{ item }}/{{ openvpn_server_common_name }}_pk_pass.txt"
+  delegate_to: localhost
+  command: cat "{{ local_creds_folder }}/{{ item }}/{{ openvpn_server_common_name }}_pk_pass.txt"
   no_log: true
   become: False
   register: client_pk_passwords
@@ -103,7 +112,7 @@
     - "{{ clients_to_add }}"
 
 - name: OpenVPN | Add Clients | Get list of clients with ccd defined
-  set_fact: 
+  set_fact:
     valid_clients_with_ccd: "{{ valid_clients | selectattr('ccd', 'defined') | selectattr('name', 'defined') | list }}"
 - debug:
     var: valid_clients_with_ccd
