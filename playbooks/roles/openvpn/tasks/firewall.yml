@@ -5,7 +5,10 @@
 
 - name: OpenVPN | Firewall | Flush existing firewall rules
   iptables:
+    table: nat
     flush: true
+  when: load_iptables_rules
+  changed_when: false
 
 - name: OpenVPN | Firewall | Write iptables rules file
   template:
