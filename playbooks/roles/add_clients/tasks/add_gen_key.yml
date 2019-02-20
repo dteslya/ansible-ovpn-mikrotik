@@ -114,8 +114,6 @@
 - name: OpenVPN | Add Clients | Get list of clients with ccd defined
   set_fact:
     valid_clients_with_ccd: "{{ valid_clients | selectattr('ccd', 'defined') | selectattr('name', 'defined') | list }}"
-- debug:
-    var: valid_clients_with_ccd
 
 - name: OpenVPN | Add Clients | Build ccd configs
   template:
