@@ -1,4 +1,5 @@
-# ansible-openvpn-mikrotik
+# ansible-openvpn-mikrotik [![Build Status](https://travis-ci.org/dteslya/ansible-ovpn-mikrotik.svg?branch=master)](https://travis-ci.org/dteslya/ansible-ovpn-mikrotik)
+
 Ansible role and playbooks for installing openvpn and managing clients.
 
 This is a fork of [ansible-openvpn](https://github.com/BastiPaeltz/ansible-openvpn) which in turn is a fork of [ansible-openvpn-hardened](https://github.com/bau-sec/ansible-openvpn-hardened).
