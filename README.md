@@ -24,6 +24,7 @@ To further guarantee RouterOS support the following settings are now default:
 The following Linux distros are tested:
 
 - Ubuntu 18.04
+- Ubuntu 16.04
 
 Other distros and versions may work too.
 
