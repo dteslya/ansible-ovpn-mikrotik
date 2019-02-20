@@ -33,15 +33,6 @@
   set_fact:
     clients_to_add: "{{ desired_valid_clients | difference(currently_valid_clients) }}"
 
-- debug:
-    var: currently_valid_clients
-- debug:
-    var: desired_valid_clients
-- debug:
-    var: clients_to_revoke
-- debug:
-    var: clients_to_add
-
 - name: OpenVPN | Sync Clients | Ask user if we should proceed
   pause:
     prompt: "We will add {{ clients_to_add }} and we will revoke {{ clients_to_revoke }}. Press 'Y' or 'y' to proceed"
