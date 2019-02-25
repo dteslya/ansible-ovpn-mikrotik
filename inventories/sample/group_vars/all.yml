@@ -32,7 +32,7 @@ openvpn_instances:
       port: 443,
       mask: "192.168.70.0 255.255.255.0",
       cidr: "192.168.70.0/24",
-      server_extra_options: ['route 172.16.0.0 255.240.0.0'],
+      server_extra_options: ['route 172.16.0.0 255.240.0.0', 'push "route 172.16.0.0 255.240.0.0"'],
       client_extra_options: [],
  }
 
